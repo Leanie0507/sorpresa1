@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorpresa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            max-width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #yesButton {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #noButton {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Media query para pantallas más pequeñas */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            #yesButton, #noButton {
+                width: 100%;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diego te tengo una sorpresa, ¿quieres verla?</h1>
+        <div class="buttons">
+            <button id="yesButton">Sí</button>
+            <button id="noButton" onclick="noResponse()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let attempts = 0;
+
+        document.getElementById("yesButton").addEventListener("mouseover", function() {
+            if (attempts < 10) {
+                moveButton();
+                attempts++;
+            }
+        });
+
+        function moveButton() {
+            const button = document.getElementById("yesButton");
+            const container = document.querySelector(".container");
+
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+
+            const randomX = Math.random() * (containerWidth - button.offsetWidth);
+            const randomY = Math.random() * (containerHeight - button.offsetHeight);
+
+            button.style.position = "absolute";
+            button.style.left = `${randomX}px`;
+            button.style.top = `${randomY}px`;
+        }
+
+        document.getElementById("yesButton").addEventListener("click", function() {
+            if (attempts >= 10) {
+                window.location.href = "juego.html"; // Redirige a la nueva página
+            }
+        });
+
+        function noResponse() {
+            alert("¡Ve xd, tienes que decir que si! 😢");
+        }
+    </script>
+</body>
+</html>
